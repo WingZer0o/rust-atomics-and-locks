@@ -4,6 +4,22 @@ fn main() {
     // two_threads();
     // closure_thread();
     // closure_thread_get_value_back();
+    scoped_threads();
+}
+
+fn scoped_threads() {
+    let numbers = vec![1, 2, 3];
+
+    thread::scope(|s| {
+        s.spawn(|| { 
+            println!("length: {}", numbers.len());
+        });
+        s.spawn(|| { 
+            for n in &numbers {
+                println!("{n}");
+            }
+        });
+    });
 }
 
 fn closure_thread_get_value_back() {
